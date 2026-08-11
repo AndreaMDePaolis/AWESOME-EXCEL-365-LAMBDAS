@@ -95,7 +95,7 @@
 
 ```
 =LAMBDA( testo;   
-           REGEXTEST (   
+           REGEX.TEST (   
              testo; "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"; 1   
            )   
        )
@@ -107,7 +107,7 @@
 
 ```
 =LAMBDA( testo;   
-           REGEXEXTRACT (   
+           REGEX.ESTRAI (   
              testo; "[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}"; 0; 1   
            )   
        )
@@ -119,7 +119,7 @@
 
 ```
 =LAMBDA( testo;   
-           REGEXREPLACE ( testo; "\D"; "" )   
+           REGEX.SOSTITUISCI ( testo; "\D"; "" )   
        )
 ```
 
@@ -130,7 +130,7 @@
 ```
 =LAMBDA( testo;   
           ANNULLA.SPAZI (   
-            REGEXREPLACE ( testo; "\s+"; " " )   
+            REGEX.SOSTITUISCI ( testo; "\s+"; " " )   
           )   
        )
 ```
@@ -150,7 +150,7 @@
                               SOSTITUISCI ( base; "à"; "a" ); "è"; "e"); "é"; "e" ); "ì";"i" ); "ò"; "o" );   
                 pulito;   
                   SOSTITUISCI ( senza_accenti; "ù"; "u" );   
-                REGEXREPLACE ( REGEXREPLACE ( pulito; "[^a-z0-9]+"; "-" ); "(^-|-$)"; "" )   
+                REGEX.SOSTITUISCI ( REGEX.SOSTITUISCI ( pulito; "[^a-z0-9]+"; "-" ); "(^-|-$)"; "" )   
               )   
        )
 ```
@@ -175,7 +175,7 @@
 ```
 =LAMBDA( testo;   
           LET (   
-                pulito; REGEXREPLACE ( ANNULLA.SPAZI ( testo ); "[-_]+"; " " );   
+                pulito; REGEX.SOSTITUISCI ( ANNULLA.SPAZI ( testo ); "[-_]+"; " " );   
                 parole; DIVIDI.TESTO ( pulito; " " );   
                 TESTO.UNISCI ( ""; VERO; MAIUSC.INIZ ( parole ))   
               )   
@@ -223,7 +223,7 @@
 =LAMBDA( percorso; [separatore];   
           LET (   
                 sep; SE ( ISOMITTED ( separatore ); "/"; separatore );   
-                REGEXEXTRACT ( percorso; "[^" & sep & "]+$" )   
+                REGEX.SOSTITUISCI ( percorso; "[^" & sep & "]+$" )   
               )   
        )
 ```
